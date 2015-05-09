@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: itinerary
+        psr4_prefix: itinerary
+        src_path: app
