@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class CaptainsController extends Controller {
 
+    /**
+     * Display a Captain based on captainID.
+     *
+     * @return Response
+     */
+    public function getCaptain($captainID)
+    {
+        return Captain::where('captainID', '=', $captainID)->get();
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
