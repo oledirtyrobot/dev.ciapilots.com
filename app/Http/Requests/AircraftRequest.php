@@ -2,7 +2,7 @@
 
 use itinerary\Http\Requests\Request;
 
-class NewAircraftRequest extends Request {
+class AircraftRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -21,9 +21,9 @@ class NewAircraftRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			'tailNumber' => 'required'
-		];
+        return [
+            'tailNumber' => 'required'
+        ];
 	}
 
 }

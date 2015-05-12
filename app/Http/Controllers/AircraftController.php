@@ -4,8 +4,6 @@ use itinerary\Aircraft;
 use itinerary\Http\Requests;
 use itinerary\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
-
 class AircraftController extends Controller {
 
 	/**
@@ -15,7 +13,8 @@ class AircraftController extends Controller {
 	 */
 	public function index()
 	{
-        return view('aircraft.index');
+        $aircraft = Aircraft::all();
+        return view('aircraft.index', compact('aircraft'));
 	}
 
 	/**
@@ -25,7 +24,7 @@ class AircraftController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('aircraft.create');
 	}
 
 	/**
@@ -33,14 +32,14 @@ class AircraftController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Requests\NewAircraftRequest $request)
+	public function store(Requests\AircraftRequest $request)
 	{
         $aircraft = new Aircraft(array(
             'tailNumber' => $request->get('tailNumber')
         ));
         $aircraft->save();
 
-        //return \Redirect::route('/')->with('message','The new aircraft has been created.');
+        return \Redirect::route('aircraft.index')->with('message','A new aircraft has been created.');
 	}
 
 	/**
@@ -51,7 +50,9 @@ class AircraftController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$aircraft = Aircraft::findOrFail($id);
+
+        return view('aircraft.show', compact('aircraft'));
 	}
 
 	/**
@@ -62,7 +63,8 @@ class AircraftController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$aircraft = Aircraft::find($id);
+        return view('aircraft.edit')->with('aircraft', $aircraft);
 	}
 
 	/**
@@ -70,11 +72,16 @@ class AircraftController extends Controller {
 	 *
 	 * @param  int  $id
 	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+ 	 */
+    public function update($id, Requests\AircraftRequest $request)
+    {
+        $aircraft = Aircraft::find($id);
+        $aircraft->update([
+            'tailNumber' => $request->get('tailNumber')
+        ]);
+        return \Redirect::route('aircraft.index',
+            array($aircraft->id))->with('message', 'The aircraft has been updated.');
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -84,7 +91,9 @@ class AircraftController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		Aircraft::destroy($id);
+        return \Redirect::route('aircraft.index')
+            ->with('message', 'The aircraft has been deleted.');
 	}
 
 }

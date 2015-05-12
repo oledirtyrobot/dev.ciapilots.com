@@ -1,5 +1,5 @@
 <!doctype  html>
-<html ng-app="aircraftApp">
+<html ng-app="itineraryApp">
 <head>
     <title>Corporate Image Aviation</title>
     <link  rel="stylesheet"  href="/css/app.css">

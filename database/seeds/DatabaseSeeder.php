@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('AircraftTableSeeder');
         $this->call('FboTableSeeder');
         $this->call('PassengerTableSeeder');
-        $this->call('ItineraryTableSeeder');
         $this->call('LegTableSeeder');
+        $this->call('ItineraryTableSeeder');
 	}
 
 }

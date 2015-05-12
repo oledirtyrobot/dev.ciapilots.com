@@ -2,6 +2,18 @@
 
 /*
 |--------------------------------------------------------------------------
+| ATTENTION:  BLADE TEMPLATE TAGS ARE RECONFIGURED TO NON-STANDARD
+|--------------------------------------------------------------------------
+|
+| We are using AngularJS on the front end which uses the same {{ }} tags
+| as Laravel Blade.  To avoid this conflict I have reconfigured Blade to
+| use <% %> tags instead, allowing AngularJS to continue using {{ }}.
+|
+*/
+Blade::setContentTags('<%', '%>');        // for variables and all things Blade
+Blade::setEscapedContentTags('<%%', '%%>');   // for escaped data
+/*
+|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
