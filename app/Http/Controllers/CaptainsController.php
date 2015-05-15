@@ -2,20 +2,9 @@
 
 use itinerary\Http\Requests;
 use itinerary\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use itinerary\Captain;
 
 class CaptainsController extends Controller {
-
-    /**
-     * Display a Captain based on captainID.
-     *
-     * @return Response
-     */
-    public function getCaptain($captainID)
-    {
-        return Captain::where('captainID', '=', $captainID)->get();
-    }
 
 	/**
 	 * Display a listing of the resource.
@@ -24,7 +13,8 @@ class CaptainsController extends Controller {
 	 */
 	public function index()
 	{
-        return view('captains.index');
+        $captains = Captain::LastNameAscending()->get();
+        return view('captains.index', compact('captains'));
 	}
 
 	/**
@@ -34,7 +24,7 @@ class CaptainsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+        return view('captains.create');
 	}
 
 	/**
@@ -42,10 +32,19 @@ class CaptainsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Requests\CaptainRequest $request)
 	{
-		//
-	}
+        $captain = new Captain(array(
+            'firstName' => $request->get('firstName'),
+            'lastName' => $request->get('lastName'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email')
+        ));
+        $captain->save();
+        flash()->success('A new Captain has been created.');
+        return \Redirect::route('captains.index');
+
+    }
 
 	/**
 	 * Display the specified resource.
@@ -55,7 +54,9 @@ class CaptainsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $captain = Captain::findOrFail($id);
+
+        return view('captains.show', compact('captain'));
 	}
 
 	/**
@@ -66,7 +67,8 @@ class CaptainsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $captain = Captain::findOrFail($id);
+        return view('captains.edit', compact('captain'));
 	}
 
 	/**
@@ -75,10 +77,19 @@ class CaptainsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Requests\CaptainRequest $request)
 	{
-		//
-	}
+        $captain = Captain::find($id);
+        /** @noinspection PhpParamsInspection */
+        $captain->update([
+            'firstName' => $request->get('firstName'),
+            'lastName' => $request->get('lastName'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email')
+        ]);
+        flash()->success('The Captain has been updated.');
+        return \Redirect::route('captains.index', array($captain->id));
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -88,7 +99,9 @@ class CaptainsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        Captain::destroy($id);
+        flash()->success('The Captain has been deleted.');
+        return \Redirect::route('captains.index');
 	}
 
 }

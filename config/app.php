@@ -147,6 +147,7 @@ return [
 		'itinerary\Providers\ConfigServiceProvider',
 		'itinerary\Providers\EventServiceProvider',
 		'itinerary\Providers\RouteServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
         //'Collective\Html\HtmlServiceProvider',
 
 
@@ -223,7 +224,8 @@ return [
         'Tabbable'  => 'Bootstrapper\Facades\Tabbable',
         'Table'     => 'Bootstrapper\Facades\Table',
         'Thumbnail' => 'Bootstrapper\Facades\Thumbnail',
-        'Debugbar'  =>  'Barryvdh\Debugbar\Facade'
+        'Debugbar'  => 'Barryvdh\Debugbar\Facade',
+        'Flash'     => 'Laracasts\Flash\Flash'
 	],
 
 ];

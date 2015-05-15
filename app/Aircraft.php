@@ -9,5 +9,8 @@ class Aircraft extends Model {
     public function leg(){
         return $this->belongsTo('Leg');
     }
+    public function passengers(){
+        return $this->belongsToMany('Passenger');
+    }
 
 }

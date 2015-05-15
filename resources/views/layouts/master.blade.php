@@ -1,18 +1,20 @@
-<!doctype  html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta  charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Corporate Image Aviation</title>
-@yield('angular')
 
+    @yield('scripts')
 </head>
 <body ng-app="itineraryApp">
+    @include('layouts.partials.nav')
 
-<div class="container">
-    @yield('content')
-</div>
+    <div class="container">
+        @include('flash::message')
 
-@include('layouts.scripts')
+        @yield('content')
+    </div>
 
+    @include('layouts.app-scripts')
 </body>
 </html>

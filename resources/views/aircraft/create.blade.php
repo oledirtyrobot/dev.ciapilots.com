@@ -1,31 +1,17 @@
 @extends('layouts.master')
 
-@section('content')
+@section('scripts')
+    @include('layouts.partials.jquery')
+@endsection
 
-    <script src="/javascript/controllers/AircraftController.js"></script>
-    <div ng-controller="AircraftController">
+@section('content')
 
         <h2>Create New Aircraft</h2>
 
-        <ul>
-            @foreach($errors->all() as $error)
-                <li><% $error %></li>
-            @endforeach
-        </ul>
-
         {!! Form::open(array('route'=>'aircraft.store', 'class'=>'form')) !!}
-
-        <div class="form-group">
-            {!! Form::label('Tail Number') !!}
-            {!! Form::text('tailNumber', null,
-                array('required', 'class'=>'form-control',
-                    'placeholder'=>'ex. N975BD'))  !!}
-        </div>
-        <div class="form-group">
-            {!! Form::submit('Create Aircraft', array('class'=>'btn btn-primary'))  !!}
-        </div>
+            @include('layouts.partials.aircraftForm', ['submitButtonText'=>'Create Aircraft'])
         {!! Form::close() !!}
-
+        @include('errors.list')
 
     </div>
 

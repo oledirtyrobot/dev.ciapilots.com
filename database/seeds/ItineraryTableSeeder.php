@@ -14,7 +14,7 @@ class ItineraryTableSeeder extends Seeder {
 	public function run()
 	{
         Itinerary::create([
-            'leadPassengerID'  =>  3,
+            'leadPassenger_id'  =>  3,
             'name'  =>  'My upcoming Trip: '
         ]);
 

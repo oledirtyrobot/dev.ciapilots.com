@@ -39,7 +39,9 @@ class AircraftController extends Controller {
         ));
         $aircraft->save();
 
-        return \Redirect::route('aircraft.index')->with('message','A new aircraft has been created.');
+        flash()->success('The Aircraft has been created.');
+
+        return \Redirect::route('aircraft.index');
 	}
 
 	/**
@@ -63,8 +65,8 @@ class AircraftController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$aircraft = Aircraft::find($id);
-        return view('aircraft.edit')->with('aircraft', $aircraft);
+		$aircraft = Aircraft::findOrFail($id);
+        return view('aircraft.edit', compact('aircraft'));
 	}
 
 	/**
@@ -79,8 +81,11 @@ class AircraftController extends Controller {
         $aircraft->update([
             'tailNumber' => $request->get('tailNumber')
         ]);
+
+        flash()->success('The Aircraft has been updated.');
+
         return \Redirect::route('aircraft.index',
-            array($aircraft->id))->with('message', 'The aircraft has been updated.');
+            array($aircraft->id));
     }
 
 	/**
@@ -92,8 +97,10 @@ class AircraftController extends Controller {
 	public function destroy($id)
 	{
 		Aircraft::destroy($id);
-        return \Redirect::route('aircraft.index')
-            ->with('message', 'The aircraft has been deleted.');
+
+        flash()->success('The Aircraft has been deleted.');
+
+        return \Redirect::route('aircraft.index');
 	}
 
 }

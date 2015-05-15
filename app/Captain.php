@@ -10,4 +10,9 @@ class Captain extends Model {
         return $this->belongsTo('Leg');
     }
 
+    public function scopeLastNameAscending($query)
+    {
+        return $query->orderBy('lastName','ASC');
+    }
+
 }

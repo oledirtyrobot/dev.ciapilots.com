@@ -9,9 +9,12 @@
 | as Laravel Blade.  To avoid this conflict I have reconfigured Blade to
 | use <% %> tags instead, allowing AngularJS to continue using {{ }}.
 |
-*/
+Currently not active...
+
 Blade::setContentTags('<%', '%>');        // for variables and all things Blade
 Blade::setEscapedContentTags('<%%', '%%>');   // for escaped data
+*/
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,7 +29,10 @@ Blade::setEscapedContentTags('<%%', '%%>');   // for escaped data
 //Route::get('/', 'WelcomeController@index');
 Route::get('/', function()
 {
-    return View::make('angular-demo');
+    $passenger = \itinerary\Passenger::findOrFail(5);
+    //$aircraft = Aircraft::lists('tailNumber', 'id');
+    return $aircraft = $passenger->aircraft;
+    //return View::make('angular-demo');
 });
 
 //jsonAircraft is a helper for the angular demo
@@ -47,10 +53,9 @@ Route::get('fbos/{airportID?}', function($airportID = 'KPHX'){
 */
 
 //does the post for the angular demo
-Route::post('aircraft', function(){
-   return \itinerary\Aircraft::create(Input::all());
-});
-
+//Route::post('aircraft', function(){
+//   return \itinerary\Aircraft::create(Input::all());
+//});
 
 Route::get('getFBO/{airportID}', 'FbosController@getFBO');
 
@@ -61,16 +66,12 @@ Route::get('getFBO/{airportID}', 'FbosController@getFBO');
 
 //});
 
-
-
-
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-
 
 Route::resource('captains',  'CaptainsController');
 Route::resource('passengers',  'PassengersController');

@@ -14,18 +14,18 @@ class LegTableSeeder extends Seeder {
 	public function run()
 	{
         Leg::create([
-            'itineraryID'  =>  1,
-            'aircraftID'  =>  1,
-            'captID'  =>  2,
+            'itinerary_id'  =>  1,
+            'aircraft_id'  =>  1,
+            'capt_id'  =>  2,
             'depAirport'  =>  'KPHX',
             'depDate'  =>  '1/1/2020',
             'depTime'  =>  '01:00 PM',
-            'depFBOID'  =>  1,
-            'passengerID'  =>  2,
+            'depFBO_id'  =>  1,
+            'passenger_id'  =>  2,
             'arrAirport'  =>  'KICT',
             'arrDate'  =>  '1/1/2020',
             'arrTime'  =>  '02:30 PM',
-            'arrFBOID'  =>  2,
+            'arrFBO_id'  =>  2,
             'legNotes' => 'This is a test leg and these are your leg notes.'
         ]);
 
